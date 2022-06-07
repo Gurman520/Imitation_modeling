@@ -1,6 +1,5 @@
 import math
 import random
-from matplotlib import pyplot as plt
 from scipy import stats
 
 x = 38
@@ -9,20 +8,14 @@ b = 1
 M = 1000
 lam = 0.1
 
-# def rand():
-#     global x
-#     t = x
-#     x = (a * x + b) % M
-#     return t / M
-
-
 if __name__ == '__main__':
     n = 100
 
-    xi = [[random.random() for j in range(2)] for i in range(n)]  # Последнее значение 0
-    print(xi)
+    xi = [[random.random() for j in range(2)] for i in
+          range(n)]  # случайные числа, равномерно распределенные в интервале от 0 до 1
 
-    zi = [math.sqrt(-2 * math.log(i[0])) * math.cos(2 * math.pi * i[1]) * 0.25 + 3 for i in xi]
+    zi = [math.sqrt(-2 * math.log(i[0])) * math.cos(2 * math.pi * i[1]) * 0.25 + 3 for i in
+          xi]  # Нормально распределенная СВ по Методу Мюлера
 
     m_o = sum(zi) / n
     d_o = sum([(i - m_o) ** 2 for i in zi]) / n

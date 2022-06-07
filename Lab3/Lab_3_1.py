@@ -1,5 +1,4 @@
 import math
-# from matplotlib import pyplot as plt
 
 x = 38
 a = 37
@@ -17,17 +16,14 @@ def rand():
 
 if __name__ == '__main__':
     n = 100
-    xi = [rand() for i in range(n)]
+    xi = [rand() for i in range(n)]  # экспоненциально распределенная СВ
 
-    m_t = 1 / lam
-    d_t = m_t ** 2
+    m_t = 1 / lam  # Теоретическое мат ожидание
+    d_t = m_t ** 2  # Теоретическая дисперсия
 
-    m_o = sum(xi) / n  # Оценка матожидания
+    m_o = sum(xi) / n  # Оценка мат ожидания
     d_o = sum([(i - m_o) ** 2 for i in xi]) / n  # Оценка дисперсии
 
-    # print(xi)
-    # print(max(xi))
-    # print(min(xi))
     h = (max(xi) - min(xi)) / (1 + 3.3221 * math.log(n, 10))  # Считаем шаг
 
     intervals = [min(xi), min(xi) + h]  # Разбиваем на интервалы
@@ -50,7 +46,7 @@ if __name__ == '__main__':
     ni_ = [i * n for i in P]  # Теоретические частоты частоты
 
     print('Исходные Частоты:', ni)
-    print('Исходные Частоты:', ni_)
+    print('Теоретические Частоты:', ni_)
 
     for i in range(len(ni)):
         if ni[i] <= 5:
@@ -61,6 +57,7 @@ if __name__ == '__main__':
             del ni_[i + 1: len(ni_)]
             break
 
+    # k-2 нету, считаем просто по k
     X2 = sum([((ni[i] - ni_[i]) ** 2) / ni_[i] for i in range(len(ni))])  # Считаем критерий пирсона
 
     print('Теоритическое мат ожидание:', m_t)
